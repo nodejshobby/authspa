@@ -23,4 +23,15 @@ class LoginController extends Controller
             "messsage"=> "UnAuthenticated"
         ],401);
     }
+
+    public function logout(Request $request){
+        if(Auth::guard('web')->logout()){
+
+            $request->session()->invalidate();
+            return response()->json([
+                "error" => false,
+                "message" => "Logged out successfully"
+            ], 200);
+        }
+    }
 }
